@@ -6,6 +6,7 @@ import ChartTest from '../Screens/ChartTest';
 import List from '../Screens/ListTest';
 import StatisticsChart from '../Screens/StatisticsCharts';
 import Eod from '../Screens/EOD';
+import CallScreen from '../Screens/CallScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -26,13 +27,16 @@ export default function AppNavigation(AppState){
              {props => <List {...props} extraData={AppState} />}
           </Stack.Screen> */}
 
-            <Stack.Screen name="Charts">
+            <Stack.Screen name="Calls">
+             {props => <CallScreen {...props} extraData={AppState} />}
+             </Stack.Screen>     
+            {/* <Stack.Screen name="Charts">
              {props => <ChartTest {...props} extraData={AppState} />}
-          </Stack.Screen>
+          </Stack.Screen> */}
                
-          <Stack.Screen name="All Notes">
+          {/* <Stack.Screen name="All Notes">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
              {props => <Home {...props} extraData={AppState} />}
-          </Stack.Screen>
+          </Stack.Screen> */}
 
 
           </Stack.Navigator>
