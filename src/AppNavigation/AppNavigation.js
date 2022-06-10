@@ -8,6 +8,7 @@ import StatisticsChart from '../Screens/StatisticsCharts';
 import Eod from '../Screens/EOD';
 import CallScreen from '../Screens/CallScreen';
 import CallScreen2 from '../Screens/Calls_screen2';
+import Test from '../Screens/test';
 
 
 const Stack = createNativeStackNavigator();
@@ -38,8 +39,16 @@ export default function AppNavigation(AppState){
             {/* <Stack.Screen name="Charts">
              {props => <ChartTest {...props} extraData={AppState} />}
           </Stack.Screen> */}
+              {/* <Stack.Screen name="test">
+             {props => <Test {...props} extraData={AppState} />}
+          </Stack.Screen> */}
+               
                
           {/* <Stack.Screen name="All Notes">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
+             {props => <Home {...props} extraData={AppState} />}
+          </Stack.Screen> */}
+
+            {/* <Stack.Screen name="All Notes">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
              {props => <Home {...props} extraData={AppState} />}
           </Stack.Screen> */}
 

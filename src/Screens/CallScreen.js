@@ -12,6 +12,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dimensions } from "react-native";
 
 import CustomLineChart from "../CustomLineChart";
+import { WebView } from 'react-native-webview';
 
 
 const data2 = {
@@ -22,6 +23,279 @@ const data2 = {
       }
     ]
   };
+
+  const chart =`
+
+  <style>
+    #chartdiv {
+      width: 100%;
+      height: 800px;
+      font-size:20px;
+    }
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am5.ready(function() {
+    
+    // Create root element
+    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+    var root = am5.Root.new("chartdiv");
+    
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+    
+    // Create chart
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+      panX: true,
+      panY: true,
+      wheelX: "panX",
+      wheelY: "zoomX",
+      layout: root.verticalLayout,
+      pinchZoomX:true
+    }));
+    
+    // Add cursor
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+      behavior: "none"
+    }));
+    cursor.lineY.set("visible", false);
+    
+    var colorSet = am5.ColorSet.new(root, {});
+    
+    // The data 8 red , 20 blue ,  30 orange , 35 green
+    var data = [
+      {
+        year: "00:47",
+        value: 4,
+        strokeSettings: {
+          stroke: colorSet.getIndex(35)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(35),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(35)
+        }
+      },
+      {
+        year: "00:54",
+        value: 4,
+        strokeSettings: {
+          stroke: colorSet.getIndex(35)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(35),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(35)
+        }
+        
+      },
+      {
+        year: "00:54",
+        value: 8,
+        strokeSettings: {
+          stroke: colorSet.getIndex(30)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(30),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(30)
+        }
+      }, {
+        year: "01:00",
+        value: 8,
+        strokeSettings: {
+          stroke: colorSet.getIndex(30)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(30),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(30)
+        }
+      },
+      {
+        year: "01:10",
+        value: 8,
+        strokeSettings: {
+          stroke: colorSet.getIndex(30)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(30),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(30)
+        }
+      },
+      {
+        year: "01:20",
+        value: 8,
+        strokeSettings: {
+          stroke: colorSet.getIndex(30)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(30),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(30)
+        }
+      },
+      {
+        year: "01:20",
+        value: 15,
+        strokeSettings: {
+          stroke: colorSet.getIndex(8)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(8),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(8)
+        }
+      },
+      {
+        year: "01:30",
+        value: 20,
+        strokeSettings: {
+          stroke: colorSet.getIndex(8)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(8),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(8)
+        }
+      },
+      {
+        year: "01:30",
+        value: 10,
+        strokeSettings: {
+          stroke: colorSet.getIndex(8)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(8),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(8)
+        }
+      },
+      {
+        year: "01:30",
+        value: 10,
+        strokeSettings: {
+          stroke: colorSet.getIndex(35)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(35),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(35)
+        }
+      },
+      {
+        year: "01:48",
+        value: 6,
+        strokeSettings: {
+          stroke: colorSet.getIndex(35)
+        },
+        fillSettings: {
+          fill: colorSet.getIndex(35),
+        },
+        bulletSettings: {
+          fill: colorSet.getIndex(35)
+        }
+      },
+    ];
+    
+    // Create axes
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+    var xRenderer = am5xy.AxisRendererX.new(root, {});
+    xRenderer.grid.template.set("location", 0.5);
+    xRenderer.labels.template.setAll({
+      location: 0.5,
+      multiLocation: 0.5
+    });
+    
+    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+      categoryField: "year",
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {})
+    }));
+    
+    xAxis.data.setAll(data);
+    
+    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+      maxPrecision: 0,
+      renderer: am5xy.AxisRendererY.new(root, {})
+    }));
+    
+    var series = chart.series.push(am5xy.LineSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "value",
+      categoryXField: "year",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{valueY}",
+        dy:-5
+      })
+    }));
+    
+    series.strokes.template.setAll({
+      templateField: "strokeSettings",
+      strokeWidth: 2
+    });
+    
+    series.fills.template.setAll({
+      visible: true,
+      fillOpacity: 0.5,
+      templateField: "fillSettings"
+    });
+    
+    
+    series.bullets.push(function() {
+      return am5.Bullet.new(root, {
+        sprite: am5.Circle.new(root, {
+          templateField: "bulletSettings",
+          radius: 5
+        })
+      });
+    });
+    
+    series.data.setAll(data);
+    series.appear(1000);
+    
+    // Add scrollbar
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
+    chart.set("scrollbarX", am5.Scrollbar.new(root, {
+      orientation: "horizontal",
+      marginBottom: 20
+    }));
+    
+    // Make stuff animate on load
+    // https://www.amcharts.com/docs/v5/concepts/animations/
+    chart.appear(1000, 100);
+    
+    }); // end am5.ready()
+    </script>
+    
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+
+`;
+
 
 
   const lowestValueInSuccess = 250;
@@ -156,7 +430,7 @@ const data2 = {
 /> */}
 
 
-<LineChart
+{/* <LineChart
     data={{
       labels: ["00:47", "00:54", "01:01", "01:08", "01:16"],
       datasets: [
@@ -214,7 +488,12 @@ const data2 = {
 
 
     }}
-  />
+  /> */}
+
+<WebView
+      originWhitelist={['*']}
+      source={{ html: chart }}
+    />
 
 
 
